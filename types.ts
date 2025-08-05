@@ -9,10 +9,11 @@ export type User = {
    updatedAt: string;
 }
 
-export type Transaction = {
+export type CreditTransaction = {
+   flow: "credit",
+   type: "deposit" | "returns";
    id: string;
    userId: string;
-   type: string;
    amount: number;
    previousBalance: number;
    newBalance: number;
@@ -20,6 +21,21 @@ export type Transaction = {
    paymentTransactionId: string;
    createdAt: string;
 }
+
+export type DebitTransaction = {
+   flow: "debit",
+   type: "withdrawal" | "investment";
+   id: string;
+   userId: string;
+   amount: number;
+   previousBalance: number;
+   newBalance: number;
+   status: string;
+   paymentTransactionId: string;
+   createdAt: string;
+}
+
+export type Transaction = CreditTransaction | DebitTransaction
 
 export type User_Token = {
    userId: string,

@@ -1,14 +1,23 @@
 import { Transaction, User } from "../types";
+import ErrorWithCode from "./ErrorWithCode";
 import { readTransactions, readUsers, writeTransactions, writeUsers } from "./storage";
 
 export const findUserByEmail = async (email: string) => {
    const users = await readUsers();
-   return users[email] || null;
+   const user = users[email];
+
+   if (!user) throw new ErrorWithCode("Invalid credentials", 401)
+
+   return user
 };
 
 export const findUserById = async (userId: string) => {
    const users = await readUsers();
-   return Object.values(users).find(user => user.id === userId) || null;
+   const user = Object.values(users).find(user => user.id === userId);
+
+   if (!user) throw new ErrorWithCode("Invalid credentials", 401)
+
+   return user
 };
 
 export const updateUser = async (email: string, user: User) => {

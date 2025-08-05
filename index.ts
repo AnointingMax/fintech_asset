@@ -6,6 +6,7 @@ import cors from "cors"
 import ErrorWithCode from "./utils/ErrorWithCode";
 import { initializeStorage } from "./utils/storage";
 import authRouter from "./routers/authRouter";
+import transactionRouter from "./routers/transactionRouter";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/auth", authRouter)
+app.use("/transactions", transactionRouter)
 
 app.use((error: ErrorWithCode, req: Request, res: Response, next: NextFunction): void => {
 	console.log(error.message)
