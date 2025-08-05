@@ -1,7 +1,8 @@
 import * as Yup from "yup";
 
-export const envSchema = Yup.object().shape({
+const envSchema = Yup.object().shape({
    APP_PORT: Yup.number().required(),
+   JWT_SECRET: Yup.string().required(),
 });
 
 const env = envSchema.validateSync(process.env, {

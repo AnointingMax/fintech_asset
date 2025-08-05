@@ -5,6 +5,7 @@ import morgan from "morgan"
 import cors from "cors"
 import ErrorWithCode from "./utils/ErrorWithCode";
 import { initializeStorage } from "./utils/storage";
+import authRouter from "./routers/authRouter";
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.use(morgan('dev'))
 app.get("/", (req: Request, res: Response) => {
 	res.send("Welcome to Fintech Asset");
 });
+
+app.use("/auth", authRouter)
 
 app.use((error: ErrorWithCode, req: Request, res: Response, next: NextFunction): void => {
 	console.log(error.message)
