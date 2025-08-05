@@ -20,7 +20,7 @@ export const loginController = catchAsync(async (req: Request, res: Response) =>
    if (!isValidPassword) throw new ErrorWithCode("Invalid credentials", 401)
 
    const token = jwt.sign(
-      { userId: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName },
+      { userId: user.id, email: user.email },
       env.JWT_SECRET,
       { expiresIn: '24h' }
    );
@@ -55,4 +55,13 @@ export const registerController = catchAsync(async (req: Request, res: Response)
    await writeTransactions(transactions);
 
    res.status(201).json({ message: "User registered successfully" })
+})
+
+export const getUserProfile = catchAsync(async (req: Request, res: Response) => {
+   const user = req.user
+
+   res.json({
+      message: "Profile returned successfully",
+      data: user
+   })
 })

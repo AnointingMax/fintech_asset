@@ -20,3 +20,8 @@ export type Transaction = {
    paymentTransactionId: string;
    createdAt: string;
 }
+
+export type User_Token = {
+   userId: string,
+   email: string
+}
