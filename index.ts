@@ -4,8 +4,11 @@ import 'dotenv/config'
 import morgan from "morgan"
 import cors from "cors"
 import ErrorWithCode from "./utils/ErrorWithCode";
+import { initializeStorage } from "./utils/storage";
 
 const app = express();
+
+initializeStorage()
 
 app.use(cors({
 	origin: [
