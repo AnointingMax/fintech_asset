@@ -14,10 +14,10 @@ export const loginController = catchAsync(async (req: Request, res: Response) =>
 
    const user = await findUserByEmail(email);
 
-   if (!user) throw new ErrorWithCode("Invalid credentials", 401)
+   if (!user) throw new ErrorWithCode("Invalid credentials", 400)
 
    const isValidPassword = await bcrypt.compare(password, user.password);
-   if (!isValidPassword) throw new ErrorWithCode("Invalid credentials", 401)
+   if (!isValidPassword) throw new ErrorWithCode("Invalid credentials", 400)
 
    const token = jwt.sign(
       { userId: user.id, email: user.email },
@@ -31,7 +31,7 @@ export const loginController = catchAsync(async (req: Request, res: Response) =>
 export const registerController = catchAsync(async (req: Request, res: Response) => {
    const { email, password, firstName, lastName } = req.body as unknown as TRegister
 
-   const existingUser = await findUserByEmail(email);
+   const existingUser = await findUserByEmail(email, false);
    if (existingUser) throw new ErrorWithCode('User already exists with this email', 400)
 
    const hashedPassword = await bcrypt.hash(password, 10);

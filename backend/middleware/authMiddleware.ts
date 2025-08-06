@@ -24,7 +24,7 @@ const authenticateToken = catchAsync(async (req: Request, res: Response, next: N
 
    const user = await findUserByEmail(email);
 
-   if (!user) throw new ErrorWithCode("Invalid credentials", 401)
+   if (!user) throw new ErrorWithCode("Invalid token", 401)
 
    req.user = user;
 
