@@ -1,7 +1,7 @@
 import express from 'express';
-import { deposit, getTransactions, invest } from '../controllers/transactionController';
+import { deposit, getTransactions, invest, withdraw } from '../controllers/transactionController';
 import validateRequestParameters from '../validation';
-import { depositValidator, getTransactionsValidator, investValidator } from '../validation/transactionValidation';
+import { depositValidator, getTransactionsValidator, investValidator, withdrawValidator } from '../validation/transactionValidation';
 import authenticateToken from '../middleware/authMiddleware';
 
 export const transactionRouter = express.Router();
@@ -26,9 +26,9 @@ transactionRouter.post(
 )
 transactionRouter.post(
    "/withdraw",
-   validateRequestParameters(investValidator, "body"),
+   validateRequestParameters(withdrawValidator, "body"),
    authenticateToken,
-   invest
+   withdraw
 )
 
 export default transactionRouter
