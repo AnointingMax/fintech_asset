@@ -1,6 +1,7 @@
 import { api } from '@/axios';
 import { CustomInput } from '@/components';
 import { Button } from '@/components/ui/button';
+import { usePortalContext } from '@/hooks/PortalContext';
 import { showSuccessToast } from '@/lib/toast';
 import type { ApiResponse } from '@/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -17,6 +18,7 @@ const depositFn = (data: { amount: number }): Promise<ApiResponse> => api.post("
 
 const Deposit = () => {
    const queryClient = useQueryClient();
+   const { closePortal } = usePortalContext()
 
    const initialValues = {
       amount: 0
@@ -29,6 +31,7 @@ const Deposit = () => {
          await queryClient.invalidateQueries({
             queryKey: ["user"]
          })
+         closePortal()
       }
    })
 
