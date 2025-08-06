@@ -11,7 +11,7 @@ export const renderCurrency = (amount: number | string = 0, currency: string = "
   currencyDisplay: "narrowSymbol",
   minimumFractionDigits: 0,
   maximumFractionDigits: 2,
-}).format(parseFloat(amount?.toString() ?? 0) || 0);
+}).format((parseFloat(amount?.toString() ?? 0) || 0) / 100);
 
 export const renderNumber = (amount: number | string = 0): string => new Intl.NumberFormat("en-GB", {
   minimumFractionDigits: 0,

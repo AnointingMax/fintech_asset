@@ -2,9 +2,9 @@ import { useAuthContext } from "@/hooks/AuthContext";
 import { Navigate, Outlet } from "react-router-dom";
 
 const AppLayout = () => {
-   const { token, user } = useAuthContext();
+   const { token } = useAuthContext();
 
-   if (!token || !user) return <Navigate to="/auth" />
+   if (!token) return <Navigate to="/auth" />
 
    return (
       <Outlet />

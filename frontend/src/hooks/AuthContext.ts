@@ -3,7 +3,6 @@ import { createContext, useContext, type Dispatch } from "react"
 
 type AuthContextType = {
    user: User | null,
-   setUser: Dispatch<React.SetStateAction<User | null>>,
    token: string,
    setToken: Dispatch<React.SetStateAction<string>>,
 }
