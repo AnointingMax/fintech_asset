@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const login = (data: Record<string, string>): Promise<ApiResponse<{ user: User, token: string }>> => api.post("/auth/", data)
 
 const Login = () => {
-   const { setUser, setToken } = useAuthContext();
+   const { setToken } = useAuthContext();
 
    const validationSchema = Yup.object().shape({
       email: Yup.string().email("Please provide a valid email").required("Please provide a valid email"),
@@ -27,9 +27,7 @@ const Login = () => {
       mutationFn: login,
       onSuccess: ({ message, data }) => {
          showSuccessToast(message);
-         setUser(data?.user);
          setToken(data?.token);
-         setToLocalStorage("user", data?.user);
          setToLocalStorage("token", data?.token);
       },
    });

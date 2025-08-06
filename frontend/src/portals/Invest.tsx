@@ -31,6 +31,9 @@ const Invest = () => {
          await queryClient.invalidateQueries({
             queryKey: ["user"]
          })
+         await queryClient.invalidateQueries({
+            queryKey: ["transactions"]
+         })
          closePortal()
       }
    })
